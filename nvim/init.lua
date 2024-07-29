@@ -72,7 +72,7 @@ require("conform").setup({
 
 require('lualine').setup(
   {
-    options = { theme = 'horizon' }
+    options = { theme = 'nord' }
   })
 
 require("tailwind-tools").setup({
@@ -83,6 +83,28 @@ require 'lspconfig'.emmet_ls.setup {
 
 }
 
+--ufo fold config
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+vim.keymap.set('n', 'zM', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+vim.keymap.set('n', 'zK', function()
+  local winid = require('ufo').peekFoldedLinesUnderCursor()
+  if not winid then
+    -- choose one of coc.nvim and nvim lsp
+    vim.fn.CocActionAsync('definitionHover')     -- coc.nvim
+    vim.lsp.buf.hover()
+  end
+end)
+
+require('ufo').setup({
+  provider_selector = function(bufnr, filetype, buftyoe)
+    return { 'lsp', 'indent' }
+  end
+})
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")

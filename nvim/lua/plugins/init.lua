@@ -74,4 +74,22 @@ return {
       vim.keymap.set({ "n", "v" }, '<leader>xe', require('nvim-emmet').wrap_with_abbreviation)
     end,
   },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    lazy = false
+  },
+  {
+    "gbprod/cutlass.nvim",
+    lazy = false,
+    opts = {
+      -- your configuration comes here
+      -- or don't set opts to use the default settings
+      -- refer to the configuration section below
+    }
+  },
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false
+  },
 }
